@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://csmhfjo67047"]
+
+[ext_resource type="Texture2D" uid="uid://j4625l4yitat" path="res://import/icodot-png/node/fantasy/icon-jewel.png" id="1_4fa74"]
+
+[node name="DataContainer" type="HBoxContainer" unique_id=1657228850]
+custom_minimum_size = Vector2(48, 16)
+size_flags_horizontal = 4
+
+[node name="Texture" type="TextureRect" parent="." unique_id=759053550]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("1_4fa74")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1430311612]
+custom_maximum_size = Vector2(21, 17)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 12
+text = "222"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1

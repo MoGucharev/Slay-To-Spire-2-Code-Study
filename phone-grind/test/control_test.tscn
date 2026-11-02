@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://b1vrxhw2l5n8y"]
+
+[ext_resource type="Script" uid="uid://wksx01tcq623" path="res://src/Core/Combat/UI/UIBase.cs" id="1_275wm"]
+
+[node name="ControlTest" type="Control" unique_id=398033638]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_275wm")

@@ -1,0 +1,22 @@
+using System;
+using Game.src.Core.Localization.DynamicVar;
+using Game.src.Core.Entities.equipment;
+using System.Security.Cryptography.X509Certificates;
+
+namespace Game.src.Core.model;
+
+public interface IStaticEqu
+{
+    
+}
+public class StaticEqu : EquipmentBase
+{
+//显示名称
+    public string Name;
+//购买栏里的描述
+    public string Description;
+//购买花费的钱
+    public CostVar CostVar;
+
+
+}

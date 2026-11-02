@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://b36a1gangel7j"]
+
+[ext_resource type="Texture2D" uid="uid://dew4akit7rgh1" path="res://image/Debug/EquDebug.png" id="1_lwipt"]
+
+[node name="DebugScene" type="Control" unique_id=637170286]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1112.0
+offset_bottom = -608.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=885136156]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_lwipt")
+expand_mode = 1
+stretch_mode = 4
