@@ -14,6 +14,12 @@ public class DynamicVar
 //数值名称
     protected string _name;
 
+    public T Clone<T>(T var) where T:DynamicVar
+    {
+        T cost = var;
+        return  cost;
+    }
+
 
 //数值类型
 

@@ -1,14 +1,13 @@
 using Godot;
-using System;
 using Game.src.Core.Entities.equipment;
 using Game.src.Core.Localization.DynamicVar;
 using Game.src.Core.Helper;
-using System.Runtime.Intrinsics.X86;
+using System;
 
 namespace Game.src.Core.model;
 
 /// <summary>
-/// 玩家放置的物品的基础，包括相关方法和属性
+/// 玩家放置的物品的数据基础，包括相关方法和属性
 /// </summary>
 public class EquipmentBase
 {
@@ -28,11 +27,12 @@ public class EquipmentBase
     protected string _VFXShortPath ="";
     protected string _localPropName = "Equipment";
 //状态类型
+
     protected EquStateProp _stateProp;
 //功能类型
     protected  EquProp _equProp;
 //行动值
-    public  DynamicVar ActionValue;
+    public virtual DynamicVar ActionValue{get;set;}
 //几秒行动一次
     public CDVar CDVar;
 //图标资源
@@ -62,6 +62,35 @@ public class EquipmentBase
             ActionTexture = _setIconTexture(_equProp);
         }
     }
+/// ID模块
+
+    public ModelId Id {get;}
+
+    public EquipmentBase()
+    {
+        Type type = typeof(EquipmentBase);
+        if (!ModelDb.TryGetIdFromDb(type))
+        throw new Exception ($"已经创建过{type}类型的ModelId");
+        Id = ModelDb.GetModelId(type);
+    }
+
+    public EquipmentBase CloneEqu()
+    {
+        EquipmentBase equipmentBase = new();
+        equipmentBase = (EquipmentBase)MemberwiseClone();
+        equipmentBase.DeepClone();
+        return equipmentBase;
+    }
+
+/// <summary>
+/// 子类覆写,这是深拷贝
+/// </summary>
+    public virtual void DeepClone()
+    {
+        ActionValue = ActionValue.Clone<DynamicVar>(ActionValue);
+    }
+
+//
 
 /// <summary>
 /// 设置并返回视效，无视效时返回null

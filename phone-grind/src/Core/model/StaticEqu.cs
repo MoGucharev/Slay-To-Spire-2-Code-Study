@@ -18,5 +18,11 @@ public class StaticEqu : EquipmentBase
 //购买花费的钱
     public CostVar CostVar;
 
+    public override void DeepClone()
+    {
+        base.DeepClone();
+        CostVar = CostVar.Clone<CostVar>(CostVar);
+    }
+
 
 }

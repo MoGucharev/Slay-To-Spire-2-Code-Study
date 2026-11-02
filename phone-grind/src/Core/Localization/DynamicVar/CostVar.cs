@@ -21,4 +21,6 @@ public class CostVar : DynamicVar
     {
         Prop = prop;
     }
+
+//代表复制了一个新的原值，和之前的不一样。这里省略了STS2里变量认主的步骤
 }
