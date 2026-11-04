@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using Godot;
 
 namespace Game.src.Core.model;
 /// <summary>
@@ -32,7 +33,7 @@ public static class ModelDb
 
     public static void InitEquDb(Type[] types = null)
     {
-        Type[] typeValue = types ?? _allEquipmentType;
+        Type[] typeValue = types ?? AllEquipmentType;
         foreach (Type type in typeValue)
         {
             ModelId modelId = GetModelId(type);
@@ -40,11 +41,25 @@ public static class ModelDb
             EquipmentDb[modelId] = equipmentBase;
         }
     }
-
+/// <summary>
+/// 外部获取数据库中数据原件的方法
+/// </summary>
+/// <typeparam name="T">数据类型</typeparam>
+/// <returns></returns>
     public static T Get<T>() where T : EquipmentBase
     {
         return (T)EquipmentDb[GetModelId<T>()];
     } 
+/// <summary>
+/// 外部获取数据库中数据复印件的方法，一般使用这个
+/// </summary>
+/// <typeparam name="T"></typeparam>
+/// <returns></returns>
+    public static T GetMutable<T>() where T : EquipmentBase
+    {
+        T equipment = Get<T>();
+        return (T)equipment.CloneEqu();
+    }
 
     public static ModelId GetModelId<T>()
     {
@@ -73,12 +88,8 @@ public static class ModelDb
 
     public static string GetCategory(Type type) => GetCategoryType(type).ToString();
     public static string GetEntry(Type type) => type.ToString();
-//
-    public static bool TryGetIdFromDb(Type type)
-    {
-        ModelId id = GetModelId(type);
-        if (EquipmentDb[id] == null) return false;
-        else return true;
-    }
+//查看库里是否有类型
+    public static bool TryGetIdFromDb(Type type) => 
+    EquipmentDb.TryGetValue(GetModelId(type),out EquipmentBase equipmentBase) && equipmentBase != null;
 
 }

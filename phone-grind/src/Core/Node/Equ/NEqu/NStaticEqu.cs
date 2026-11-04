@@ -2,6 +2,7 @@ using Game.src.Core.RichTextTags;
 using Game.src.Core.model;
 using Game.src.Core.Node.Pooling;
 using Game.src.Core.Helper;
+using Godot;
 
 
 namespace Game.src.Core.Node.Equ.NEquNamespace;

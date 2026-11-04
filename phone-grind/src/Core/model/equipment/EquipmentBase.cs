@@ -65,20 +65,23 @@ public class EquipmentBase
 /// ID模块
 
     public ModelId Id {get;}
+//是不是复印件和原始模板 
+    public bool IsMutable {get;private set;}
+    public bool IsOriginal => !IsMutable;
 
     public EquipmentBase()
     {
-        Type type = typeof(EquipmentBase);
-        if (!ModelDb.TryGetIdFromDb(type))
+        Type type = GetType();
+        if (ModelDb.TryGetIdFromDb(type))
         throw new Exception ($"已经创建过{type}类型的ModelId");
         Id = ModelDb.GetModelId(type);
     }
 
     public EquipmentBase CloneEqu()
     {
-        EquipmentBase equipmentBase = new();
-        equipmentBase = (EquipmentBase)MemberwiseClone();
+        EquipmentBase equipmentBase = (EquipmentBase)MemberwiseClone();
         equipmentBase.DeepClone();
+        equipmentBase.IsMutable = true;
         return equipmentBase;
     }
 
@@ -88,6 +91,7 @@ public class EquipmentBase
     public virtual void DeepClone()
     {
         ActionValue = ActionValue.Clone<DynamicVar>(ActionValue);
+        CDVar = CDVar.Clone<CDVar>(CDVar);
     }
 
 //

@@ -20,10 +20,11 @@ public partial class UIBase :Control
     public override void _Ready()
     {
         base._Ready();
-        NStaticEqu.InitPool();
-        NodePool.GetPoolable(typeof(NStaticEqu),out IPoolable poolable);
+        NStaticEqu.InitPool(); //对象池初始化
+        ModelDb.InitEquDb(); //数据库初始化
+        NodePool.GetPoolable(typeof(NStaticEqu),out IPoolable poolable); //从对象池得到对象
         NStaticEqu test = (NStaticEqu)poolable;
-        test.EquipmentData = new StaticSword();
+        test.EquipmentData = ModelDb.GetMutable<StaticSword>(); //从数据库得到数据
 
         AddChild(test);
 
