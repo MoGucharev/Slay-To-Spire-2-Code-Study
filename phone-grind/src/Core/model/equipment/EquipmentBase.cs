@@ -3,6 +3,8 @@ using Game.src.Core.Entities.equipment;
 using Game.src.Core.Localization.DynamicVar;
 using Game.src.Core.Helper;
 using System;
+using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
 namespace Game.src.Core.model;
 
@@ -26,6 +28,7 @@ public class EquipmentBase
 /// </summary>
     protected string _VFXShortPath ="";
     protected string _localPropName = "Equipment";
+    protected readonly EquipmentBase _onwer;
 //状态类型
 
     protected EquStateProp _stateProp;
@@ -42,6 +45,7 @@ public class EquipmentBase
     public string ActionTexture;
 //场景的地址 
     public string EquPath;
+    public EquipmentBase Onwer{get=>_onwer;}
 //设备的基本属性
     public virtual EquStateProp StateProp
     {
@@ -71,6 +75,7 @@ public class EquipmentBase
 
     public EquipmentBase()
     {
+        _onwer = this;
         Type type = GetType();
         if (ModelDb.TryGetIdFromDb(type))
         throw new Exception ($"已经创建过{type}类型的ModelId");
@@ -94,7 +99,14 @@ public class EquipmentBase
         CDVar = CDVar.Clone<CDVar>(CDVar);
     }
 
-//
+    public virtual Task BeforeEquPlayed(EquipmentBase transformData)
+    {
+        return Task.CompletedTask;
+    }
+    public virtual Task AfterEquPlayed()
+    {
+        return Task.CompletedTask;
+    }
 
 /// <summary>
 /// 设置并返回视效，无视效时返回null
@@ -106,7 +118,7 @@ public class EquipmentBase
         return SceneHelper.GetInstant<Control>(_VFXShortPath);
     }
 
-
+//继承私有方法
 
 /// <summary>
 /// 由于攻击，防御，功能三个图标不同，根据选的种类获取对应的行为图标
@@ -141,7 +153,6 @@ public class EquipmentBase
             default:
                 return SceneHelper.GetPackedPath("Debug/DebugScene");
         }
-
     }
 
 //检测是否为第一次使用
@@ -149,5 +160,11 @@ public class EquipmentBase
     {
         if (useCount == 0) {useCount++;return false;}
         else {useCount = 0;return true;}
+    }
+    protected void _damagePlus(decimal num)
+    {
+        DamageVar damageVar = (DamageVar)ActionValue;
+        if (!damageVar.Prop.HasFlag(DamageProp.Move))return;
+        ActionValue.BaseValue += num;
     }
 }

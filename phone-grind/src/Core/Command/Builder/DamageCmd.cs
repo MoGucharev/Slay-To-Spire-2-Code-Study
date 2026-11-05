@@ -3,6 +3,7 @@
 using Game.src.Core.Entities.Creatures;
 using Game.src.Core.Localization.DynamicVar;
 using Game.src.Core.model;
+using Game.src.Core.Hook;
 using Godot;
 
 namespace Game.src.Core.Command.Builder;
@@ -35,6 +36,8 @@ public class DamageCmd
 
     public void Executive()
     {
+        Hooks.BeforeAttackApplied();
         GD.Print("成功执行伤害cmd");
+        Hooks.AfterAttackApplied();
     }
 }

@@ -3,6 +3,7 @@ using Game.src.Core.model;
 using Game.src.Core.Node.Pooling;
 using Game.src.Core.Helper;
 using Godot;
+using Game.src.Core.Entities;
 
 
 namespace Game.src.Core.Node.Equ.NEquNamespace;
@@ -32,6 +33,7 @@ public partial class NStaticEqu : NEqu<StaticEqu>
         UpdateName();
         UpdateDescription();
         UpdateCostNum();
+        TempomraryHookDb.JoinEquDb(this);
     }
     protected override void CacheNodeAdd()
     {

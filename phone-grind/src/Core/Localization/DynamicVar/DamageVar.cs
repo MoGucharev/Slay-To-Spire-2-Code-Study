@@ -1,5 +1,6 @@
 using System;
 
+
 namespace Game.src.Core.Localization.DynamicVar;
 
 public class DamageVar : DynamicVar

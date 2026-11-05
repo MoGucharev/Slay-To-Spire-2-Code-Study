@@ -9,7 +9,7 @@ public interface IStaticEqu
 {
     
 }
-public class StaticEqu : EquipmentBase
+public abstract class StaticEqu : EquipmentBase
 {
 //显示名称
     public string Name;
@@ -23,6 +23,8 @@ public class StaticEqu : EquipmentBase
         base.DeepClone();
         CostVar = CostVar.Clone<CostVar>(CostVar);
     }
+
+    public abstract void OnPlay();
 
 
 }

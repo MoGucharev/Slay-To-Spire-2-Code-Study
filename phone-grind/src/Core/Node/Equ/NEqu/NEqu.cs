@@ -2,7 +2,9 @@ using System;
 using Game.src.Core.model;
 using Game.src.Core.Node.Pooling;
 using Game.src.Core.RichTextTags;
+using Game.src.Core.Helper;
 using Godot;
+using Game.src.Core.Localization.DynamicVar;
 
 namespace Game.src.Core.Node.Equ.NEquNamespace;
 
@@ -61,6 +63,7 @@ public abstract partial class NEqu<T>: Control,IPoolable where T : EquipmentBase
         UpdateActionTexture();
         UpdateActionNum();
         UpdateCDNum();
+        
     }
 
     protected void CacheNodeBase()
@@ -134,4 +137,5 @@ public abstract partial class NEqu<T>: Control,IPoolable where T : EquipmentBase
         if (EquipmentData == null) _cdNum.Text = "";
         _cdNum.Text = EquipmentData.CDVar.BaseValue.ToString();
     }
+
 }

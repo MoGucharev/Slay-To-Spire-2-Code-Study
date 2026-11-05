@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://2wsb4tn2p8vd"
-path="res://.godot/imported/guard.png-fc63fe6a01a783d3f3e42314cb34a536.ctex"
+path="res://.godot/imported/guard.png-c28da1863f7a8db53a896423702cdcb4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://import/assets/icons/physical/guard.png"
-dest_files=["res://.godot/imported/guard.png-fc63fe6a01a783d3f3e42314cb34a536.ctex"]
+source_file="res://image/EquIcon/Defend/guard.png"
+dest_files=["res://.godot/imported/guard.png-c28da1863f7a8db53a896423702cdcb4.ctex"]
 
 [params]
 

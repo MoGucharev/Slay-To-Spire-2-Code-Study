@@ -2,7 +2,7 @@ using Godot;
 
 namespace Game.src.Core.Helper;
 
-public class SceneHelper
+public static class SceneHelper
 {
     /// <summary>
     /// 获得完整的场景路径

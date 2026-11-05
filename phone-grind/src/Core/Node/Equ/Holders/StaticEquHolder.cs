@@ -1,4 +1,8 @@
 using Game.src.Core.Node.Equ.NEquNamespace;
+using  Game.src.Core.Node.Pooling;
+using Game.src.Core.model;
+using Game.src.Core.model.equipment;
+
 using Godot;
 
 namespace Game.src.Core.Node.Equ.Holders;
@@ -19,6 +23,7 @@ public partial class StaticEquHolder : Control
     {
         base._Ready();
         HitBox = GetNode<Button>("Button");
+        _connectSignal();
     }
 
 //将视觉层放到此层上
@@ -26,21 +31,25 @@ public partial class StaticEquHolder : Control
     {
         if (NStaticEqu != null) throw new System.Exception("此操控层已经有视觉节点了");
         NStaticEqu = nStaticEqu;
-        if (nStaticEqu.GetParent() == null) AddChild(nStaticEqu);
-        else nStaticEqu.Reparent(this);
+        if (nStaticEqu.GetParent() == null) 
+        {
+            AddChild(nStaticEqu);
+        }
+        else
+        {
+            nStaticEqu.Reparent(this); 
+            AddChild(nStaticEqu);
+        }
 
     }
-
-
-
 
 
 //私有调用方法
 
     protected void _connectSignal()
     {
-        HitBox.FocusEntered += _OnHover;
-        HitBox.FocusExited += _UnHover;
+        HitBox.MouseEntered += _OnHover;
+        HitBox.MouseExited += _UnHover;
         HitBox.ButtonDown += _OnClick;
         HitBox.ButtonUp += _UnClick;
     }
@@ -59,6 +68,7 @@ public partial class StaticEquHolder : Control
     private void _OnClick()
     {
         _isClick = true;
+        NStaticEqu.StaticEquData.OnPlay();
     }
 
     private void _UnClick()
