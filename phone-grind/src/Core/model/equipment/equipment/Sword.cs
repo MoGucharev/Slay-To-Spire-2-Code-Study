@@ -3,7 +3,7 @@ using Game.src.Core.Entities.equipment;
 using Game.src.Core.Localization.DynamicVar;
 using Game.src.Core.Localization;
 using Game.src.Core.Command;
-using Godot;
+using Game.src.Core.Hook;
 using Game.src.Core.Command.Builder;
 
 namespace Game.src.Core.model.equipment;
@@ -25,6 +25,7 @@ public sealed class StaticSword : StaticEqu
 
     public override void OnPlay()
     {
+        Hooks.BeforeEquPlayed(this);
         DamageCmd damageCmd = new();
         damageCmd.DamageCmdCreate((DamageVar)ActionValue,null)
             .SetEquOnwer(this)

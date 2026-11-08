@@ -30,14 +30,15 @@ public static class Hooks
         SetPoolables();
     }
 
-    public static async Task BeforeEquPlayed()
+    public static async Task BeforeEquPlayed(EquipmentBase transformer)
     {
-        SpreadAll();
+        SpreadAll(transformer);
         GD.Print("钩子BeforeEquPlayed");
     }
 
     public static async Task AfterEquPlayed()
     {
+        
         GD.Print("钩子AfterEquPlayed");
     }
     public static async Task BeforeDamageApplied()
@@ -50,7 +51,6 @@ public static class Hooks
     }
     public static async Task BeforeAttackApplied()
     {
-        SpreadAll();
         GD.Print("钩子BeforeAttackApplied");
     }
     public static async Task AfterAttackApplied()
@@ -59,11 +59,12 @@ public static class Hooks
     }
 
 //私有
-    private static void SpreadAll()
+    private static void SpreadAll(EquipmentBase transformer)
     {
     foreach (NStaticEqu poolable in _poolables)
         {
-            poolable.StaticEquData.BeforeEquPlayed(poolable.StaticEquData);
+            poolable.StaticEquData.BeforeEquPlayed(transformer);
+            poolable.UpdateVisual();
         }
 
     }

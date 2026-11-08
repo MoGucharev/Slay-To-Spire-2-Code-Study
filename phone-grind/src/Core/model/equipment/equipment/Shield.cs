@@ -6,6 +6,7 @@ using Game.src.Core.Command;
 using Godot;
 using Game.src.Core.Command.Builder;
 using System.Threading.Tasks;
+using Game.src.Core.Hook;
 
 namespace Game.src.Core.model.equipment;
 
@@ -26,6 +27,7 @@ public sealed class StaticShield : StaticEqu
 
     public override void OnPlay()
     {
+        Hooks.BeforeEquPlayed(this);
         DamageCmd damageCmd = new();
         damageCmd.DamageCmdCreate((DamageVar)ActionValue,null)
             .SetEquOnwer(this)
@@ -34,8 +36,8 @@ public sealed class StaticShield : StaticEqu
     }
     public override Task BeforeEquPlayed(EquipmentBase transformData)
     {
-        GD.Print("BeforeEquPlayed");
         if (transformData.Onwer == this.Onwer) return Task.CompletedTask;
+        GD.Print("BeforeEquPlayed");
         _damagePlus(1m);
         return Task.CompletedTask;
 
